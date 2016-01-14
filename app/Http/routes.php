@@ -11,6 +11,8 @@
 |
 */
 
+//
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -22,12 +24,15 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/', 'HomeController@index');
+
+//    Route::get('domains', 'DomainsController@index');
+//    Route::get('domains/create', 'DomainsController@create');
+//    Route::get('domains/{id}', 'DomainsController@show');
+//    Route::post('domains', 'DomainsController@store');
+
+    Route::resource('domains', 'DomainsController');
 });

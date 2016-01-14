@@ -16,7 +16,7 @@ class CreateDomainsTable extends Migration
             $table->increments('id');
             $table->string('domain', 100);
             $table->decimal('charge', 5,2)->default(0);
-            $table->date('renewal_date');
+            $table->timestamp('renewal_date');
             $table->tinyInteger('duration')->default(12)->unsigned();
             $table->boolean('send_notification')->default(0);
             $table->string('email', 100);
