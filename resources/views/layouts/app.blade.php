@@ -49,6 +49,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('domains') }}">Domains</a></li>
+                    <li><a href="{{ url('hosts') }}">Hosts</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

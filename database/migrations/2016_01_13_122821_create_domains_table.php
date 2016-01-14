@@ -23,9 +23,14 @@ class CreateDomainsTable extends Migration
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('company', 100)->nullable();
+            $table->integer('host_id')->unsigned();
             $table->text('notes')->nullable();
             $table->timestamps();
-        });
+
+            $table->foreign('host_id')
+                ->references('id')
+                ->on('hosts');
+       });
     }
 
     /**

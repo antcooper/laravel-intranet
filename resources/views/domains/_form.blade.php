@@ -1,4 +1,5 @@
 <fieldset>
+    <input type="hidden" name="hostid" value="1">
     <legend>Domain Details</legend>
     <div class="row">
         <div class="col-md-6">
@@ -83,8 +84,17 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
+                {!! Form::label('host_id', 'Host', ['class' => 'control-label']) !!}
+                <select name="host_id" class="form-control">
+                    <option value="0">-</option>
+                    @foreach($hosts as $host)
+                        <option value="{{ $host->id }}" @if(isset($domain->hostid) && $domain->hostid == $host->id) selected @endif>{{ $host->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 {!! Form::label('notes', 'Notes', ['class' => 'control-label']) !!}
-                {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => '6']) !!}
+                {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => '4']) !!}
             </div>
         </div>
     </div>

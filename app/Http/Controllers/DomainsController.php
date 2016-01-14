@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain;
+use App\Host;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DomainRequest;
@@ -42,7 +43,7 @@ class DomainsController extends Controller
     {
         // TODO: Throws ModelNotFoundException which we need to handle gracefully
         $domain = Domain::findOrFail($id);
-        return view('domains.show', compact('domain'));
+        return $domain;
     }
 
     /**
@@ -52,7 +53,9 @@ class DomainsController extends Controller
      */
     public function create()
     {
-        return view('domains.create');
+        $hosts = Host::all();
+
+        return view('domains.create', compact('hosts'));
     }
 
     /**
@@ -69,12 +72,27 @@ class DomainsController extends Controller
 
     }
 
+    /**
+     * Show edit form
+     *
+     * @param $id
+     * @return Response
+     */
     public function edit($id)
     {
         $domain = Domain::findOrFail($id);
-        return view('domains.edit', compact('domain'));
+        $hosts = Host::all();
+
+        return view('domains.edit', compact('domain', 'hosts'));
     }
 
+    /**
+     * Persist changes to database
+     *
+     * @param $id
+     * @param DomainRequest $request
+     * @return Response
+     */
     public function update($id, DomainRequest $request)
     {
         $domain = Domain::findOrFail($id);

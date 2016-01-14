@@ -35,4 +35,5 @@ Route::group(['middleware' => 'web'], function () {
 //    Route::post('domains', 'DomainsController@store');
 
     Route::resource('domains', 'DomainsController');
+    Route::resource('hosts', 'HostsController');
 });

@@ -17,7 +17,8 @@ class Domain extends Model
         'first_name',
         'last_name',
         'company',
-        'notes'
+        'host_id',
+        'notes',
     ];
 
     // Convert date fields to Carbon instance
@@ -31,5 +32,15 @@ class Domain extends Model
     public function setRenewalDateAttribute($date)
     {
         $this->attributes['renewal_date'] = Carbon::parse($date);
+    }
+
+    /**
+     * A Domain belongs to a Host
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function host()
+    {
+        return $this->belongsTo('App\Host');
     }
 }

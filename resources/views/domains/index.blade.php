@@ -11,6 +11,7 @@
         <thead>
         <tr>
             <th>Domain Name</th>
+            <th class="hidden-xs">Host</th>
             <th>Renewal</th>
             <th class="hidden-xs">&nbsp;</th>
             <th class="hidden-xs">Client</th>
@@ -29,6 +30,7 @@
                     @endif
                 >
                     <td><a href="{{ action('DomainsController@edit', ['id' => $domain->id]) }}">{{ $domain->domain }}</a></td>
+                    <td class="hidden-xs">{{ $domain->host->name }}</td>
                     <td>{{ $domain->renewal_date->format('d M Y') }}</td>
                     <td class="hidden-xs">{{ $domain->renewal_date->diffForHumans() }}</td>
                     <td class="hidden-xs">{{ $domain->first_name }} {{ $domain->last_name }}</td>
