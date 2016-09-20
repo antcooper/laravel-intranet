@@ -64,8 +64,10 @@ class HostsController extends Controller
     public function store(HostRequest $request)
     {
         Host::create($request->all());
-        return redirect('hosts');
 
+        return redirect('hosts')->with([
+            'flash_message' => 'Host added'
+        ]);
     }
 
     /**
@@ -92,6 +94,8 @@ class HostsController extends Controller
         $host = Host::findOrFail($id);
         $host->update($request->all());
 
-        return redirect('hosts');
+        return redirect('hosts')->with([
+            'flash_message' => 'Host updated'
+        ]);
     }
 }

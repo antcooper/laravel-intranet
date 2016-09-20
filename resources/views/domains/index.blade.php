@@ -14,6 +14,7 @@
             <th class="hidden-xs">Host</th>
             <th>Renewal</th>
             <th class="hidden-xs">&nbsp;</th>
+            <th class="hidden-xs">&nbsp;</th>
             <th class="hidden-xs">Client</th>
             <th class="hidden-xs text-right">Charge</th>
         </tr>
@@ -29,12 +30,14 @@
                         class="warning"
                     @endif
                 >
-                    <td><a href="{{ action('DomainsController@edit', ['id' => $domain->id]) }}">{{ $domain->domain }}</a></td>
-                    <td class="hidden-xs">{{ $domain->host->name }}</td>
+                    <td>{{ link_to_action('DomainsController@edit', $domain->domain, ['id' => $domain->id]) }}</td>
+                    <td class="hidden-xs">{{ (isset($domain->host->name)) ? $domain->host->name : '' }}</td>
                     <td>{{ $domain->renewal_date->format('d M Y') }}</td>
                     <td class="hidden-xs">{{ $domain->renewal_date->diffForHumans() }}</td>
+                    <td class="hidden-xs">{!! ($domain->send_notification) ? '<i class="fa fa-envelope"></i>' : '' !!}</td>
                     <td class="hidden-xs">{{ $domain->first_name }} {{ $domain->last_name }}</td>
                     <td class="hidden-xs text-right">£{{ $domain->charge }}</td>
+                    <td class="hidden-xs"><a href="{{ action('DomainsController@destroy', ['id' => $domain->id]) }}" class="text-danger"><i class="fa fa-trash"></i></a></td>
                 </tr>
             @endforeach
         </tbody>

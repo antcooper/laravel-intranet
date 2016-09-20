@@ -8,6 +8,14 @@
     </p>
 
     <table class="table table-hover">
+        <th>
+            <div class="row">
+
+            </div>
+        </th>
+    </table>
+
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Name</th>

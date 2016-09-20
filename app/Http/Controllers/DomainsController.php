@@ -53,7 +53,8 @@ class DomainsController extends Controller
      */
     public function create()
     {
-        $hosts = Host::all();
+        // Retrieve list of hosts to assign
+        $hosts = Host::orderby('name')->lists('name', 'id');
 
         return view('domains.create', compact('hosts'));
     }
@@ -61,14 +62,16 @@ class DomainsController extends Controller
     /**
      * Save the domain to database
      *
-     * @param CreateDomainRequest $request
+     * @param DomainRequest $request
      * @return Redirect
      */
     public function store(DomainRequest $request)
     {
         Domain::create($request->all());
 
-        return redirect('domains');
+        return redirect('domains')->with([
+            'flash_message' => 'Domain added'
+        ]);
 
     }
 
@@ -81,7 +84,9 @@ class DomainsController extends Controller
     public function edit($id)
     {
         $domain = Domain::findOrFail($id);
-        $hosts = Host::all();
+
+        // Retrieve list of hosts to assign
+        $hosts = Host::orderby('name')->lists('name', 'id');
 
         return view('domains.edit', compact('domain', 'hosts'));
     }
@@ -98,6 +103,8 @@ class DomainsController extends Controller
         $domain = Domain::findOrFail($id);
         $domain->update($request->all());
 
-        return redirect('domains');
+        return redirect('domains')->with([
+            'flash_message' => 'Domain updated'
+        ]);
     }
 }

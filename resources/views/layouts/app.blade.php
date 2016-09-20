@@ -12,19 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/presentation/css/app.css" rel="stylesheet">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
+    <link href="{{ elixir('css/all.css') }}" rel="stylesheet">
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default">
@@ -75,12 +63,21 @@
     </nav>
 
     <div class="container">
+        @if (Session::has('flash_message'))
+            <div class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
+                @if (Session::has('flash_message_important'))
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                @endif
+                {{ Session::get('flash_message') }}
+            </div>
+        @endif
+
         @yield('content')
     </div>
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="{{ elixir('js/all.js') }}"></script>
 </body>
 </html>
